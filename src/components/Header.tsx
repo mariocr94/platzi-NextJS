@@ -2,14 +2,9 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { useAuth } from '@hooks/useAuth';
+import Link from 'next/link';
 import { Fragment } from 'react';
 
-const userData = {
-   name: 'Tom Cook',
-   email: 'tom@example.com',
-   imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
 const navigation = [
    { name: 'Dashboard', href: '/dashboard', current: true },
    { name: 'Productos', href: '/dashboard/products/', current: false },
@@ -29,7 +24,9 @@ export default function Header() {
    const userData = {
       name: auth?.user.name,
       email: auth?.user.password,
-      imageUrl: auth?.user.avatar,
+      imageUrl:
+         auth?.user.avatar ||
+         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
    };
    return (
       <>
@@ -41,27 +38,30 @@ export default function Header() {
                         <div className="flex items-center">
                            <div className="flex-shrink-0">
                               <img
-                                 className="h-8 w-8"
                                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                                 className="h-8 w-8"
                                  alt="Workflow"
                               />
                            </div>
                            <div className="hidden md:block">
                               <div className="ml-10 flex items-baseline space-x-4">
                                  {navigation.map((item) => (
-                                    <a
+                                    <Link
                                        key={item.name}
                                        href={item.href}
-                                       className={classNames(
-                                          item.current
-                                             ? 'bg-gray-900 text-white'
-                                             : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                          'px-3 py-2 rounded-md text-sm font-medium'
-                                       )}
                                        aria-current={item.current ? 'page' : undefined}
                                     >
-                                       {item.name}
-                                    </a>
+                                       <span
+                                          className={classNames(
+                                             item.current
+                                                ? 'bg-gray-900 text-white'
+                                                : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                             'px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white'
+                                          )}
+                                       >
+                                          {item.name}
+                                       </span>
+                                    </Link>
                                  ))}
                               </div>
                            </div>
@@ -82,8 +82,8 @@ export default function Header() {
                                     <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                        <span className="sr-only">Open user menu</span>
                                        <img
-                                          className="h-8 w-8 rounded-full"
                                           src={userData.imageUrl}
+                                          className="h-8 w-8 rounded-full"
                                           alt=""
                                        />
                                     </Menu.Button>
@@ -146,8 +146,8 @@ export default function Header() {
                         <div className="flex items-center px-5">
                            <div className="flex-shrink-0">
                               <img
-                                 className="h-10 w-10 rounded-full"
                                  src={userData.imageUrl}
+                                 className="h-10 w-10 rounded-full"
                                  alt=""
                               />
                            </div>

@@ -6,6 +6,7 @@ import useAlert from '@hooks/useAlert';
 import endPoints from '@services/api';
 import { deleteProduct } from '@services/api/product';
 import axios from 'axios';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -119,9 +120,9 @@ const Products = () => {
                                     <div className="flex items-center">
                                        <div className="flex-shrink-0 h-10 w-10">
                                           <img
+                                             src={product.images[0] || '/No-image-found.jpg'}
                                              className="h-10 w-10 rounded-full"
-                                             src={product.images[0]}
-                                             alt=""
+                                             alt="image"
                                           />
                                        </div>
                                        <div className="ml-4">

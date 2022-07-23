@@ -24,7 +24,7 @@ const Edit = () => {
          }
       };
       getProduct();
-   }, [router?.isReady]);
+   }, [router?.isReady, router.query]);
 
    return (
       <>

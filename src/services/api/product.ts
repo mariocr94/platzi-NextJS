@@ -8,7 +8,6 @@ const addProduct = async (body: any) => {
          'Content-Type': 'application/json',
       },
    };
-
    const response = await axios.post(endPoints.products.postProducts, body, config);
    return response.data;
 };
